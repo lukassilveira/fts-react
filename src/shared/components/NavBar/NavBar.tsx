@@ -1,21 +1,10 @@
 import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import AddIcon from "@mui/icons-material/Add";
-import LeaderboardIcon from "@mui/icons-material/Leaderboard";
-import Divider from "@mui/material/Divider";
-import SearchIcon from "@mui/icons-material/Search";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -25,49 +14,9 @@ import { addTask } from "../../../features/task/taskSlice.ts";
 import { setFilter } from "../../../features/filter/filterSlice.ts";
 import { RootState } from "../../../store.ts";
 import { setSortBy } from "../../../features/sortBy/sortBySlice.ts";
+import NavBarDrawer from "./NavBarDrawer.tsx";
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: "#fcac64",
-  "&:hover": {
-    backgroundColor: "#fcbc7c",
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "15ch",
-      "&:focus": {
-        width: "40ch",
-      },
-    },
-  },
-}));
-
-const NavBar: React.FC = ({}) => {
+const NavBar: React.FC = () => {
   const dispatch = useDispatch();
   const filters = useSelector((state: RootState) => state.filters);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -85,6 +34,10 @@ const NavBar: React.FC = ({}) => {
 
   const handleFilterChange = (name: string, value: string) => {
     dispatch(setFilter({ name, value }));
+  };
+
+  const handleSortChange = (value: string) => {
+    dispatch(setSortBy(value));
   };
 
   const toggleDrawer = (open: boolean) => () => {
@@ -146,97 +99,17 @@ const NavBar: React.FC = ({}) => {
           >
             FTS - Lukas Silveira
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon sx={{ color: "#9C5E39" }} />
-            </SearchIconWrapper>
-            <StyledInputBase
-              sx={{ color: "#693110" }}
-              placeholder="Buscar tarefa..."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
         </Toolbar>
       </AppBar>
 
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
-        >
-          <List>
-            <Typography variant="h6" sx={{ mx: 2, my: 1 }}>
-              Filtrar
-            </Typography>
-            <Box sx={{ px: 2 }}>
-              <TextField
-                select
-                fullWidth
-                label="Prioridade"
-                value={filters.priority}
-                onChange={(e) => handleFilterChange("priority", e.target.value)}
-                sx={{ mb: 2 }}
-              >
-                <MenuItem value="">Todas</MenuItem>
-                <MenuItem value="Baixa">Baixa</MenuItem>
-                <MenuItem value="Média">Média</MenuItem>
-                <MenuItem value="Alta">Alta</MenuItem>
-              </TextField>
-            </Box>
-            <Box sx={{ px: 2 }}>
-              <TextField
-                select
-                fullWidth
-                label="Status"
-                value={filters.status}
-                onChange={(e) => handleFilterChange("status", e.target.value)}
-                sx={{ mb: 2 }}
-              >
-                <MenuItem value="">Todos</MenuItem>
-                <MenuItem value="Pendente">Pendente</MenuItem>
-                <MenuItem value="Em Progresso">Em Progresso</MenuItem>
-                <MenuItem value="Concluído">Concluído</MenuItem>
-              </TextField>
-            </Box>
-            <Divider />
-            <Typography variant="h6" sx={{ mx: 2, my: 1 }}>
-              Ordenar
-            </Typography>
-            <Box sx={{ px: 2 }}>
-              <TextField
-                select
-                fullWidth
-                label="Data"
-                value={filters.priority}
-                onChange={(e) => dispatch(setSortBy(e.target.value))}
-                sx={{ mb: 2 }}
-              >
-                <MenuItem value="recent">Criação mais recente</MenuItem>
-                <MenuItem value="oldest">Criação mais antiga</MenuItem>
-                <MenuItem value="nearDeadline">Prazo mais próximo</MenuItem>
-                <MenuItem value="farDeadline">Prazo mais distante</MenuItem>
-              </TextField>
-            </Box>
-            <Divider />
-            <ListItemButton onClick={handleModalOpen}>
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText primary="Adicionar Tarefa" />
-            </ListItemButton>
-            <Divider />
-            <ListItemButton>
-              <ListItemIcon>
-                <LeaderboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Gráficos" />
-            </ListItemButton>
-            <Divider />
-          </List>
-        </Box>
-      </Drawer>
+      <NavBarDrawer
+        drawerOpen={drawerOpen}
+        toggleDrawer={toggleDrawer}
+        filters={filters}
+        handleFilterChange={handleFilterChange}
+        handleModalOpen={handleModalOpen}
+        handleSortChange={handleSortChange}
+      />
 
       <Modal open={modalOpen} onClose={handleModalClose}>
         <Box

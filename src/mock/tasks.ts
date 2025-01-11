@@ -18,7 +18,7 @@ export const mockTasks: Task[] = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget erat justo.",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget erat justo.",
-    status: "Pendente",
+    status: "Em progresso",
     priority: "Média",
     createdAt: new Date("1902-04-23T18:25:43.511Z").getTime(),
     responsible: "Maria",
@@ -40,7 +40,7 @@ export const mockTasks: Task[] = [
     title: "Lorem ipsum",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget erat justo.",
-    status: "Em progresso",
+    status: "Pendente",
     priority: "Alta",
     createdAt: new Date("1904-04-23T18:25:43.511Z").getTime(),
     responsible: "Lucas",
@@ -85,7 +85,7 @@ export const mockTasks: Task[] = [
     title: "Lorem ipsum",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget erat justo.",
-    status: "Pendente",
+    status: "Concluída",
     priority: "Média",
     createdAt: new Date("1908-04-23T18:25:43.511Z").getTime(),
     responsible: "Maria",
