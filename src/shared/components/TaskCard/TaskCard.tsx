@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Task } from "../../../models/task";
 import { useDispatch } from "react-redux";
-import { updateTask } from "../../../features/task/taskSlice.ts";
+import { updateTask, deleteTask } from "../../../features/task/taskSlice.ts";
 
 import { orange } from "@mui/material/colors";
 
@@ -31,6 +31,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [taskData, setTaskData] = useState({
+    id: task.id,
     title: task.title,
     description: task.description,
     priority: task.priority,
@@ -52,6 +53,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
   const handleModalOpen = () => {
     setTaskData({
+      id: task.id,
       title: task.title,
       description: task.description,
       priority: task.priority,
@@ -79,10 +81,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   };
 
   const handleDelete = () => {
+    dispatch(deleteTask(taskData.id.toFixed()));
+    console.log("Tarefa excluída:", task.id);
     handleMenuClose();
-    console.log("Excluir tarefa:", task);
-    // Adicione sua lógica de exclusão aqui
   };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
