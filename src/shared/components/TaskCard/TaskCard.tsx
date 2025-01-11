@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Task } from "../../../models/task";
+import { useDispatch } from "react-redux";
+import { updateTask } from "../../../features/task/taskSlice.ts";
+
 import { orange } from "@mui/material/colors";
 
 import Card from "@mui/material/Card";
@@ -24,14 +27,17 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [taskData, setTaskData] = useState({
-    title: "",
-    description: "",
-    priority: "",
-    deadline: "",
-    responsible: "",
+    title: task.title,
+    description: task.description,
+    priority: task.priority,
+    deadline: task.deadline,
+    responsible: task.responsible,
+    status: task.status,
+    createdAt: task.createdAt,
   });
 
   const open = Boolean(anchorEl);
@@ -45,6 +51,15 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   };
 
   const handleModalOpen = () => {
+    setTaskData({
+      title: task.title,
+      description: task.description,
+      priority: task.priority,
+      deadline: task.deadline,
+      responsible: task.responsible,
+      status: task.status,
+      createdAt: task.createdAt,
+    });
     setModalOpen(true);
     handleMenuClose();
   };
@@ -54,9 +69,13 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   };
 
   const handleEdit = () => {
-    handleMenuClose();
-    console.log("Editar tarefa:", task);
-    // Adicione sua lógica de edição aqui
+    const updatedTask = {
+      ...taskData,
+      id: task.id, // Inclua o ID da tarefa original
+    };
+
+    dispatch(updateTask(updatedTask));
+    handleModalClose();
   };
 
   const handleDelete = () => {
@@ -68,12 +87,6 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTaskData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleEditTask = () => {
-    console.log("Tarefa editada:", taskData);
-    handleModalClose();
-    // Adicione a lógica de envio aqui
   };
 
   return (
@@ -250,7 +263,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleEditTask}
+            onClick={handleEdit}
             fullWidth
           >
             Cadastrar
