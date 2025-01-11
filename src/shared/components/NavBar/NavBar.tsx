@@ -77,8 +77,10 @@ const NavBar: React.FC = ({}) => {
     title: "",
     description: "",
     priority: "",
-    deadline: "",
+    deadline: 0,
     responsible: "",
+    createdAt: Date.now(),
+    status: "Pendente",
   });
 
   const handleFilterChange = (name: string, value: string) => {
@@ -94,22 +96,13 @@ const NavBar: React.FC = ({}) => {
       data.title.trim() !== "" &&
       data.description.trim() !== "" &&
       data.priority.trim() !== "" &&
-      data.deadline.trim() !== "" &&
+      data.deadline !== 0 &&
       data.responsible.trim() !== ""
     );
   };
 
   const handleCreateTask = () => {
-    const newTask = {
-      title: "Nova Tarefa",
-      description: "Descrição da nova tarefa",
-      priority: "Alta",
-      createdAt: Date.now(),
-      deadline: Date.now(),
-      responsible: "João",
-      status: "Pendente",
-    };
-    dispatch(addTask(newTask));
+    dispatch(addTask(taskData));
   };
 
   const handleModalOpen = () => {
