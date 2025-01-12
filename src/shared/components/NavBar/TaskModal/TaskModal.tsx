@@ -57,7 +57,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, onSave }) => {
 
   const handleSave = () => {
     onSave(taskData);
-    onClose(); // Fecha o modal após salvar
+    onClose();
   };
 
   return (

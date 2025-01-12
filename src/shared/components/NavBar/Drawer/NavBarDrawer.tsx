@@ -1,4 +1,6 @@
 import React from "react";
+import { useTaskService } from "../../../services/taskService.ts";
+
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -11,7 +13,6 @@ import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import MenuItem from "@mui/material/MenuItem";
-import { useTaskService } from "../../services/taskService.ts";
 
 interface NavBarDrawerProps {
   drawerOpen: boolean;

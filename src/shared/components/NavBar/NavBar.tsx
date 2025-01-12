@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../../../features/task/taskSlice.ts";
+import NavBarDrawer from "./Drawer/NavBarDrawer.tsx";
+import TaskModal from "./TaskModal/TaskModal.tsx";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useDispatch } from "react-redux";
-import { addTask } from "../../../features/task/taskSlice.ts";
-import NavBarDrawer from "./NavBarDrawer.tsx";
-import TaskModal from "./NavBarModal.tsx";
 
 const NavBar: React.FC = () => {
   const dispatch = useDispatch();
