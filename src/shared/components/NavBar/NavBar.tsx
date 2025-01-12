@@ -5,30 +5,18 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTask } from "../../../features/task/taskSlice.ts";
-import { setFilter } from "../../../features/filter/filterSlice.ts";
-import { RootState } from "../../../store.ts";
-import { setSortBy } from "../../../features/sortBy/sortBySlice.ts";
 import NavBarDrawer from "./NavBarDrawer.tsx";
 import TaskModal from "./NavBarModal.tsx";
 
 const NavBar: React.FC = () => {
   const dispatch = useDispatch();
-  const filters = useSelector((state: RootState) => state.filters);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => () => {
     setDrawerOpen(open);
-  };
-
-  const handleFilterChange = (name: string, value: string) => {
-    dispatch(setFilter({ name, value }));
-  };
-
-  const handleSortChange = (value: string) => {
-    dispatch(setSortBy(value));
   };
 
   const handleModalOpen = () => {
@@ -71,10 +59,7 @@ const NavBar: React.FC = () => {
       <NavBarDrawer
         drawerOpen={drawerOpen}
         toggleDrawer={toggleDrawer}
-        filters={filters}
-        handleFilterChange={handleFilterChange}
         handleModalOpen={handleModalOpen}
-        handleSortChange={handleSortChange}
       />
 
       <TaskModal

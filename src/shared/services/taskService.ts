@@ -9,6 +9,7 @@ export const useTaskService = () => {
   const dispatch = useDispatch();
 
   const filters = useSelector((state: RootState) => state.filters);
+  const sortBy = useSelector((state: RootState) => state.sortBy);
 
   const handleFilterChange = (name: string, value: string) => {
     dispatch(setFilter({ name, value }));
@@ -24,6 +25,7 @@ export const useTaskService = () => {
 
   return {
     filters,
+    sortBy,
     handleFilterChange,
     handleSortChange,
     handleCreateTask,

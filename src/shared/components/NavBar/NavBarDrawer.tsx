@@ -11,24 +11,22 @@ import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import MenuItem from "@mui/material/MenuItem";
+import { useTaskService } from "../../services/taskService.ts";
 
 interface NavBarDrawerProps {
   drawerOpen: boolean;
   toggleDrawer: (open: boolean) => () => void;
-  filters: any;
-  handleFilterChange: (name: string, value: string) => void;
   handleModalOpen: () => void;
-  handleSortChange: (value: string) => void;
 }
 
 const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
   drawerOpen,
   toggleDrawer,
-  filters,
-  handleFilterChange,
   handleModalOpen,
-  handleSortChange,
 }) => {
+  const { filters, sortBy, handleFilterChange, handleSortChange } =
+    useTaskService();
+
   return (
     <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
       <Box
@@ -46,7 +44,7 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
               select
               fullWidth
               label="Prioridade"
-              value={filters.priority}
+              value={filters.priority || ""}
               onChange={(e) => handleFilterChange("priority", e.target.value)}
               sx={{ mb: 2 }}
             >
@@ -61,7 +59,7 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
               select
               fullWidth
               label="Status"
-              value={filters.status}
+              value={filters.status || ""}
               onChange={(e) => handleFilterChange("status", e.target.value)}
               sx={{ mb: 2 }}
             >
@@ -80,7 +78,7 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
               select
               fullWidth
               label="Data"
-              value={filters.priority}
+              value={sortBy.sortBy || ""}
               onChange={(e) => handleSortChange(e.target.value)}
               sx={{ mb: 2 }}
             >
