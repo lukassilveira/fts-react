@@ -1,10 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
 import "./index.css";
+import React from "react";
 import App from "./App.tsx";
-import { Provider } from "react-redux";
-import reportWebVitals from "./reportWebVitals";
 import store from "./store.ts";
+import { Provider } from "react-redux";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

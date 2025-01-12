@@ -2,17 +2,17 @@ import React from "react";
 import { useTaskService } from "../../../services/taskService.ts";
 
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import AddIcon from "@mui/icons-material/Add";
-import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 
 interface NavBarDrawerProps {
   drawerOpen: boolean;
