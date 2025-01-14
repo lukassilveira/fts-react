@@ -73,7 +73,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const handleEdit = () => {
     const updatedTask = {
       ...taskData,
-      id: task.id, // Inclua o ID da tarefa original
+      id: task.id,
     };
 
     dispatch(updateTask(updatedTask));
@@ -85,7 +85,6 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     console.log("Tarefa excluída:", task.id);
     handleMenuClose();
   };
-
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

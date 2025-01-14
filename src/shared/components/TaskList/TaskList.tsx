@@ -17,13 +17,13 @@ const TaskList: React.FC = ({}) => {
 
   const sortedTasks = [...filteredTasks].sort((a, b) => {
     if (sortBy === "recent") {
-      return b.createdAt - a.createdAt; // Mais recente
+      return b.createdAt - a.createdAt;
     } else if (sortBy === "oldest") {
-      return a.createdAt - b.createdAt; // Mais antigo
+      return a.createdAt - b.createdAt;
     } else if (sortBy === "nearDeadline") {
-      return new Date(a.deadline).getTime() - new Date(b.deadline).getTime(); // Prazo mais próximo
+      return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
     } else if (sortBy === "farDeadline") {
-      return new Date(b.deadline).getTime() - new Date(a.deadline).getTime(); // Prazo mais distante
+      return new Date(b.deadline).getTime() - new Date(a.deadline).getTime();
     }
     return 0;
   });
