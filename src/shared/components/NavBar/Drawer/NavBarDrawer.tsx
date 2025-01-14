@@ -29,7 +29,12 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
     useTaskService();
 
   return (
-    <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+    <Drawer
+      anchor="left"
+      open={drawerOpen}
+      onClose={toggleDrawer(false)}
+      data-testid="nav-bar-drawer"
+    >
       <Box
         sx={{ width: 250 }}
         role="presentation"
