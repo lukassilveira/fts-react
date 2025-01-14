@@ -8,3 +8,13 @@ export interface Task {
   deadline: number;
   responsible: string;
 }
+
+export interface CreateTaskModalData {
+  title: string;
+  description: string;
+  priority: string;
+  deadline: number;
+  responsible: string;
+  createdAt: number;
+  status: string;
+}

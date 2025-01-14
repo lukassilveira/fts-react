@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CreateTaskModalData } from "../../../../models/task";
 
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -10,22 +11,12 @@ import Typography from "@mui/material/Typography";
 interface TaskModalProps {
   open: boolean;
   onClose: () => void;
-  onSave: (taskData: TaskData) => void;
-}
-
-interface TaskData {
-  title: string;
-  description: string;
-  priority: string;
-  deadline: number;
-  responsible: string;
-  createdAt: number;
-  status: string;
+  onSave: (taskData: CreateTaskModalData) => void;
 }
 
 const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, onSave }) => {
   const [isFormValid, setIsFormValid] = useState(false);
-  const [taskData, setTaskData] = useState<TaskData>({
+  const [taskData, setTaskData] = useState<CreateTaskModalData>({
     title: "",
     description: "",
     priority: "",
@@ -35,7 +26,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, onSave }) => {
     status: "Pendente",
   });
 
-  const validateForm = (data: TaskData) => {
+  const validateForm = (data: CreateTaskModalData) => {
     return (
       data.title.trim() !== "" &&
       data.description.trim() !== "" &&
