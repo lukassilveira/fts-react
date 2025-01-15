@@ -50,7 +50,7 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
               select
               fullWidth
               label="Prioridade"
-              value={filters.priority || ""}
+              value={filters?.priority || ""}
               onChange={(e) => handleFilterChange("priority", e.target.value)}
               sx={{ mb: 2 }}
             >
@@ -65,7 +65,7 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
               select
               fullWidth
               label="Status"
-              value={filters.status || ""}
+              value={filters?.status || ""}
               onChange={(e) => handleFilterChange("status", e.target.value)}
               sx={{ mb: 2 }}
             >
@@ -84,7 +84,7 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
               select
               fullWidth
               label="Data"
-              value={sortBy.sortBy || ""}
+              value={sortBy?.sortBy || ""}
               onChange={(e) => handleSortChange(e.target.value)}
               sx={{ mb: 2 }}
             >
