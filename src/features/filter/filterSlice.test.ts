@@ -7,7 +7,7 @@ describe("filterSlice", () => {
   };
 
   it("should handle initial state", () => {
-    expect(filterReducer(undefined, { type: '' })).toEqual(initialState);
+    expect(filterReducer(undefined, { type: "" })).toEqual(initialState);
   });
 
   it("should handle setFilter", () => {
