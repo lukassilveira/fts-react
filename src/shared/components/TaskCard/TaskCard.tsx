@@ -1,26 +1,19 @@
-import React, { useState } from "react";
-import { Task } from "../../../models/task";
-import { useDispatch } from "react-redux";
-import { updateTask, deleteTask } from "../../../features/task/taskSlice.ts";
-
-import { orange } from "@mui/material/colors";
-
-import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-
-import IconButton, { IconButtonProps } from "@mui/material/IconButton";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Card from "@mui/material/Card";
 import Menu from "@mui/material/Menu";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import Avatar from "@mui/material/Avatar";
+import { CardContent } from "@mui/material";
+import { Task } from "../../../models/task";
+import { orange } from "@mui/material/colors";
 import MenuItem from "@mui/material/MenuItem";
-
-import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import EditTaskModal from "./EditTaskModal/EditTaskModal.tsx";
+import { updateTask, deleteTask } from "../../../features/task/taskSlice.ts";
 
 interface TaskCardProps {
   task: Task;
@@ -82,7 +75,6 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
   const handleDelete = () => {
     dispatch(deleteTask(taskData.id.toFixed()));
-    console.log("Tarefa excluída:", task.id);
     handleMenuClose();
   };
 
@@ -196,82 +188,14 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           {new Date(task.createdAt).toLocaleDateString("pt-BR")}
         </Typography>
       </Box>
-      <Modal open={modalOpen} onClose={handleModalClose}>
-        <Box
-          sx={{
-            position: "absolute" as "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 2,
-          }}
-        >
-          <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
-            Nova Tarefa
-          </Typography>
-          <TextField
-            fullWidth
-            label="Título"
-            name="title"
-            value={taskData.title}
-            onChange={handleInputChange}
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            fullWidth
-            label="Descrição"
-            name="description"
-            multiline
-            rows={4}
-            value={taskData.description}
-            onChange={handleInputChange}
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            fullWidth
-            select
-            label="Prioridade"
-            name="priority"
-            value={taskData.priority}
-            onChange={handleInputChange}
-            sx={{ mb: 2 }}
-          >
-            <MenuItem value="Baixa">Baixa</MenuItem>
-            <MenuItem value="Média">Média</MenuItem>
-            <MenuItem value="Alta">Alta</MenuItem>
-          </TextField>
-          <TextField
-            fullWidth
-            label="Responsável"
-            name="responsible"
-            value={taskData.responsible}
-            onChange={handleInputChange}
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            fullWidth
-            label="Prazo"
-            name="deadline"
-            type="date"
-            value={taskData.deadline}
-            onChange={handleInputChange}
-            InputLabelProps={{ shrink: true }}
-            sx={{ mb: 2 }}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleEdit}
-            fullWidth
-          >
-            Cadastrar
-          </Button>
-        </Box>
-      </Modal>
+
+      <EditTaskModal
+        open={modalOpen}
+        onClose={handleModalClose}
+        taskData={taskData}
+        handleInputChange={handleInputChange}
+        handleEdit={handleEdit}
+      />
     </Card>
   );
 };
