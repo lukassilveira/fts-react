@@ -3,7 +3,7 @@ import TaskCard from "../TaskCard/TaskCard.tsx";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
-const TaskList: React.FC = ({}) => {
+const TaskList: React.FC = () => {
   const tasks = useSelector((state: RootState) => state.tasks);
   const filters = useSelector((state: RootState) => state.filters);
   const sortBy = useSelector((state: RootState) => state.sortBy.sortBy);
