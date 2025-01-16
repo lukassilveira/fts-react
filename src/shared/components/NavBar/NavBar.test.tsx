@@ -1,41 +1,49 @@
-import React, { useState } from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import React from "react";
+import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import NavBar from "./NavBar";
 
 const mockStore = configureStore([]);
-const mockDispatch = jest.fn();
-
-jest.mock("react-redux", () => ({
-  ...jest.requireActual("react-redux"),
-  useDispatch: () => mockDispatch,
-}));
 
 describe("NavBar Component", () => {
-  let store: any;
+  it("renders without crashing", () => {
+    // Estado inicial mockado
+    const initialState = {
+      tasks: [
+        {
+          id: 1,
+          title: "Task 1",
+          description: "Description 1",
+          status: "Pendente",
+          priority: "Alta",
+          createdAt: Date.now(),
+          deadline: Date.now(),
+          responsible: "User A",
+        },
+        {
+          id: 2,
+          title: "Task 2",
+          description: "Description 2",
+          status: "Concluída",
+          priority: "Média",
+          createdAt: Date.now(),
+          deadline: Date.now(),
+          responsible: "User B",
+        },
+      ],
+    };
 
-  const initialState = {
-    filters: {
-      priority: "",
-    },
-  };
-  store = mockStore(initialState);
+    const store = mockStore(initialState);
 
-  beforeEach(() => {
-    store = mockStore({});
-    jest.clearAllMocks();
-  });
-
-  const setup = () =>
-    render(
+    // Renderizando o NavBar com o Provider do Redux
+    const { getByText } = render(
       <Provider store={store}>
         <NavBar />
       </Provider>
     );
 
-  it("renders without crashing", () => {
-    setup();
-    expect(screen.getByText("FTS - Lukas Silveira")).toBeInTheDocument();
+    // Verifica se o título do AppBar é renderizado
+    expect(getByText("FTS - Lukas Silveira")).toBeInTheDocument();
   });
 });
