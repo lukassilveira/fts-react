@@ -36,7 +36,7 @@ const TaskList: React.FC = () => {
         flexWrap: "wrap",
         gap: "35px",
         justifyContent: "center",
-        marginTop: "35px",
+        margin: "35px 0",
       }}
     >
       {sortedTasks.map((task) => (

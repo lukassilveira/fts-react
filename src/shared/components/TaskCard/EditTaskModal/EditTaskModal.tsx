@@ -30,7 +30,11 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 400,
+          width: {
+            xs: 300,
+            sm: 400,
+            md: 500,
+          },
           bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
