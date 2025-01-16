@@ -95,9 +95,9 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         justifyContent: "space-between",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;",
         backgroundColor:
-          task.priority.toLowerCase() == "alta"
+          task.priority.toLowerCase() === "alta"
             ? "#ffa3a3"
-            : task.priority.toLowerCase() == "média"
+            : task.priority.toLowerCase() === "média"
             ? "#fff7a3"
             : "#bdffa3",
       }}
