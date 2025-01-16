@@ -1,7 +1,7 @@
 import React from "react";
-import TaskCard from "../TaskCard/TaskCard.tsx";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
+import TaskCard from "../TaskCard/TaskCard.tsx";
 
 const TaskList: React.FC = () => {
   const tasks = useSelector((state: RootState) => state.tasks);
