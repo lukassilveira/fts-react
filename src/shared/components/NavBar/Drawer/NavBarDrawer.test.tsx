@@ -1,7 +1,7 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import NavBarDrawer from "./NavBarDrawer";
+import { render, screen, fireEvent } from "@testing-library/react";
 
 const mockHandleFilterChange = jest.fn();
 const mockHandleSortChange = jest.fn();
