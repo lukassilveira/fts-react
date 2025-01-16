@@ -24,7 +24,7 @@ describe("NavBarDrawer Component", () => {
       <NavBarDrawer
         drawerOpen={drawerOpen}
         toggleDrawer={mockToggleDrawer}
-        handleModalOpen={mockHandleModalOpen}
+        handleTaskModalOpen={mockHandleModalOpen}
       />
     );
   };

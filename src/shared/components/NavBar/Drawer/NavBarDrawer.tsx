@@ -17,13 +17,15 @@ import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 interface NavBarDrawerProps {
   drawerOpen: boolean;
   toggleDrawer: (open: boolean) => () => void;
-  handleModalOpen: () => void;
+  handleTaskModalOpen: () => void;
+  handleGraphModalOpen: () => void;
 }
 
 const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
   drawerOpen,
   toggleDrawer,
-  handleModalOpen,
+  handleTaskModalOpen,
+  handleGraphModalOpen
 }) => {
   const { filters, sortBy, handleFilterChange, handleSortChange } =
     useTaskService();
@@ -95,14 +97,14 @@ const NavBarDrawer: React.FC<NavBarDrawerProps> = ({
             </TextField>
           </Box>
           <Divider />
-          <ListItemButton onClick={handleModalOpen}>
+          <ListItemButton onClick={handleTaskModalOpen}>
             <ListItemIcon>
               <AddIcon />
             </ListItemIcon>
             <ListItemText primary="Adicionar Tarefa" />
           </ListItemButton>
           <Divider />
-          <ListItemButton>
+          <ListItemButton onClick={handleGraphModalOpen}>
             <ListItemIcon>
               <LeaderboardIcon />
             </ListItemIcon>

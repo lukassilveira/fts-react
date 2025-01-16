@@ -10,22 +10,32 @@ import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import GraphModal from "./GraphModal/GraphModal.tsx";
 
 const NavBar: React.FC = () => {
   const dispatch = useDispatch();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [taskModalOpen, setTaskModalOpen] = useState(false);
+  const [graphModalOpen, setGraphModalOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => () => {
     setDrawerOpen(open);
   };
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
+  const handleTaskModalOpen = () => {
+    setTaskModalOpen(true);
   };
 
-  const handleModalClose = () => {
-    setModalOpen(false);
+  const handleTaskModalClose = () => {
+    setTaskModalOpen(false);
+  };
+
+  const handleGraphModalOpen = () => {
+    setGraphModalOpen(true);
+  };
+
+  const handleGraphModalClose = () => {
+    setGraphModalOpen(false);
   };
 
   const handleCreateTask = (taskData: any) => {
@@ -60,14 +70,17 @@ const NavBar: React.FC = () => {
       <NavBarDrawer
         drawerOpen={drawerOpen}
         toggleDrawer={toggleDrawer}
-        handleModalOpen={handleModalOpen}
+        handleTaskModalOpen={handleTaskModalOpen}
+        handleGraphModalOpen={handleGraphModalOpen}
       />
 
       <TaskModal
-        open={modalOpen}
-        onClose={handleModalClose}
+        open={taskModalOpen}
+        onClose={handleTaskModalClose}
         onSave={handleCreateTask}
       />
+
+      <GraphModal open={graphModalOpen} onClose={handleGraphModalClose} />
     </Box>
   );
 };
