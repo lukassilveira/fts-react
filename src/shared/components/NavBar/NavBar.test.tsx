@@ -8,7 +8,6 @@ const mockStore = configureStore([]);
 
 describe("NavBar Component", () => {
   it("renders without crashing", () => {
-    // Estado inicial mockado
     const initialState = {
       tasks: [
         {
@@ -36,14 +35,12 @@ describe("NavBar Component", () => {
 
     const store = mockStore(initialState);
 
-    // Renderizando o NavBar com o Provider do Redux
     const { getByText } = render(
       <Provider store={store}>
         <NavBar />
       </Provider>
     );
 
-    // Verifica se o título do AppBar é renderizado
     expect(getByText("FTS - Lukas Silveira")).toBeInTheDocument();
   });
 });
